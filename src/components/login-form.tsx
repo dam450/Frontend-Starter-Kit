@@ -36,11 +36,18 @@ export default function LoginForm() {
     },
   });
 
+  const { isSubmitting } = loginForm.formState;
+
   function onSubmit(values: z.infer<typeof loginSchema>) {
+    // TODO: Handle login logic here
     console.log(values);
 
-    // TODO: Handle login logic here
-    alert('Login!');
+    return new Promise<void>((resolve) => {
+      // Simulate an API call
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
   }
 
   return (
@@ -62,7 +69,12 @@ export default function LoginForm() {
                 <FormItem>
                   <FormLabel>E-mail</FormLabel>
                   <FormControl>
-                    <Input placeholder="exemplo@email.com" {...field} />
+                    <Input
+                      placeholder="exemplo@email.com"
+                      aria-label="e-mail"
+                      autoComplete="true"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -76,7 +88,12 @@ export default function LoginForm() {
                 <FormItem>
                   <FormLabel>Senha</FormLabel>
                   <FormControl>
-                    <Input placeholder="******" type="password" {...field} />
+                    <Input
+                      placeholder="******"
+                      type="password"
+                      aria-label="senha"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -86,8 +103,13 @@ export default function LoginForm() {
         </Form>
       </CardContent>
       <CardFooter>
-        <Button type="submit" form="login" className="w-full ">
-          Sign In
+        <Button
+          type="submit"
+          form="login"
+          className="w-full "
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Entrando...' : 'Entrar'}
         </Button>
       </CardFooter>
     </Card>
