@@ -1,12 +1,13 @@
 {
   "plugins": [
-    "prettier-plugin-tailwindcss",
-    "@trivago/prettier-plugin-sort-imports"
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
   ],
+  "tailwindConfig": "./tailwind.config.ts",
+  "tailwindFunctions": ["clsx", "cva", "cn", "tw", "twMerge", "twVariants"],
   "importOrder": ["^@/(.*)$", "^@/components/(.*)$", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
-
   "trailingComma": "es5",
   "tabWidth": 2,
   "useTabs": false,
