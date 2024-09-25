@@ -106,7 +106,7 @@ export default function LoginForm() {
         <Button
           type="submit"
           form="login"
-          className="w-full "
+          className="w-full"
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Entrando...' : 'Entrar'}
