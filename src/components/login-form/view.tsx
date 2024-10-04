@@ -1,17 +1,11 @@
-'use client';
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from './ui/card';
+} from '../ui/card';
 import {
   Form,
   FormControl,
@@ -19,37 +13,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from './ui/form';
-import { Input } from './ui/input';
+} from '../ui/form';
+import { Input } from '../ui/input';
+import { useLoginFormModel } from './model';
 
-const loginSchema = z.object({
-  email: z.string().email({ message: 'e-mail inválido' }),
-  password: z.string().min(6, { message: 'mínimo de 6 caracteres' }).max(50),
-});
-
-export default function LoginForm() {
-  const loginForm = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
-  const { isSubmitting } = loginForm.formState;
-
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    // TODO: Handle login logic here
-    console.log(values);
-
-    return new Promise<void>((resolve) => {
-      // Simulate an API call
-      setTimeout(() => {
-        resolve();
-      }, 2000);
-    });
-  }
-
+export default function LoginFormView({
+  loginForm,
+  onSubmit,
+  isSubmitting,
+}: ReturnType<typeof useLoginFormModel>) {
   return (
     <Card className="w-[350px]">
       <CardHeader>
