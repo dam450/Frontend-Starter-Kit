@@ -17,7 +17,7 @@ import {
 import { Input } from '../ui/input';
 import { useLoginFormModel } from './model';
 
-export default function LoginFormView({
+export function LoginFormView({
   loginForm,
   onSubmit,
   isSubmitting,
