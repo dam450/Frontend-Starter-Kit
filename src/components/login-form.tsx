@@ -27,7 +27,7 @@ const loginSchema = z.object({
   password: z.string().min(6, { message: 'mínimo de 6 caracteres' }).max(50),
 });
 
-export default function LoginForm() {
+export function LoginForm() {
   const loginForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
