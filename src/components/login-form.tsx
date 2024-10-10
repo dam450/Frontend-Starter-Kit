@@ -1,8 +1,11 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
+import { doCredentialsSignIn } from '@/actions/auth';
 
 import { Button } from './ui/button';
 import {
@@ -28,6 +31,8 @@ const loginSchema = z.object({
 });
 
 export function LoginForm() {
+  const router = useRouter();
+
   const loginForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -38,16 +43,21 @@ export function LoginForm() {
 
   const { isSubmitting } = loginForm.formState;
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    // TODO: Handle login logic here
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    try {
+      const formData = new FormData();
+      formData.append('email', values.email);
+      formData.append('password', values.password);
 
-    return new Promise<void>((resolve) => {
-      // Simulate an API call
-      setTimeout(() => {
-        resolve();
-      }, 2000);
-    });
+      const response = await doCredentialsSignIn(formData);
+      if (!!response.error) {
+        //        setErrorMessage(response.error.message)
+      } else {
+        router.push('/admin');
+      }
+    } catch (error) {
+      //
+    }
   }
 
   return (
