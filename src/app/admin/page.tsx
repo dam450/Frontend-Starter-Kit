@@ -1,7 +1,9 @@
-export default function AdminPage() {
+import UserAvatar from '@/components/user-avatar';
   return (
-    <main className="flex h-screen items-center justify-center">
-      <h1>Admin</h1>
+    <main className="flex h-screen flex-col items-center justify-center gap-2">
+      <h1 className="text-3xl">Admin</h1>
+
+      <UserAvatar className="mb-4 mt-8" />
     </main>
   );
 }
