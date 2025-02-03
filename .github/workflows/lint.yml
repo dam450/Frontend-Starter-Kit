@@ -1,4 +1,4 @@
-name: Lint
+name: Lint Action
 
 on:
   pull_request:
@@ -29,10 +29,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run lint
-        uses: sibiraj-s/action-eslint@v3
+      - name: Run Lint
+        uses: Krizzu/eslint-check-action@v1.1.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # optional
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
-          annotations: true
+          ghToken: ${{ secrets.GITHUB_TOKEN }}
+          eslintFiles: "src"
+          eslintConfig: ".eslintrc.json"
+          eslintExt: "js, ts, jsx, tsx"
+
+      # - name: Run lint
+      #   uses: sibiraj-s/action-eslint@v3
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }} # optional
+      #     eslint-args: '--ignore-path=.gitignore --quiet'
+      #     extensions: 'js,jsx,ts,tsx'
+      #     annotations: true
+      
